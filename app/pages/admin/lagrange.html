@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Lagrange con Integral</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000000; /* Fondo negro */
+            color: #ffffff; /* Texto blanco */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: rgba(128, 0, 128, 0.5); /* Morado con opacidad */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 100px auto; /* Centrado verticalmente y en el centro horizontal */
+            max-width: 400px;
+            border: 3px solid #FF00FF; /* Borde de neón morado */
+            box-shadow: 0 0 20px #FF00FF; /* Sombra de neón morado */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .input-container {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-container input {
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Botones azules */
+            color: #ffffff; /* Texto blanco */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Transición suave de color */
+        }
+        button:hover {
+            background-color: #0056b3; /* Cambia de color al pasar el mouse */
+        }
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Lagrange con Integral</h1>
+        <div class="input-container">
+            <label for="x">Valor de x:</label>
+            <input type="number" id="x" placeholder="Ingrese el valor de x">
+        </div>
+        <div class="input-container">
+            <label for="x0">x0:</label>
+            <input type="number" id="x0" placeholder="Ingrese el valor de x0">
+        </div>
+        <div class="input-container">
+            <label for="x1">x1:</label>
+            <input type="number" id="x1" placeholder="Ingrese el valor de x1">
+        </div>
+        <div class="input-container">
+            <label for="x2">x2:</label>
+            <input type="number" id="x2" placeholder="Ingrese el valor de x2">
+        </div>
+        <div class="input-container">
+            <label for="f_x0">f(x0):</label>
+            <input type="number" id="f_x0" placeholder="Ingrese el valor de f(x0)">
+        </div>
+        <div class="input-container">
+            <label for="f_x1">f(x1):</label>
+            <input type="number" id="f_x1" placeholder="Ingrese el valor de f(x1)">
+        </div>
+        <div class="input-container">
+            <label for="f_x2">f(x2):</label>
+            <input type="number" id="f_x2" placeholder="Ingrese el valor de f(x2)">
+        </div>
+        <div class="input-container">
+            <label for="a">Límite inferior (a):</label>
+            <input type="number" id="a" placeholder="Ingrese el valor de a">
+        </div>
+        <div class="input-container">
+            <label for="b">Límite superior (b):</label>
+            <input type="number" id="b" placeholder="Ingrese el valor de b">
+        </div>
+        <button onclick="calcularLagrange()">Calcular</button>
+        <div class="result" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularLagrange() {
+            var x = parseFloat(document.getElementById('x').value);
+            var x0 = parseFloat(document.getElementById('x0').value);
+            var x1 = parseFloat(document.getElementById('x1').value);
+            var x2 = parseFloat(document.getElementById('x2').value);
+            var f_x0 = parseFloat(document.getElementById('f_x0').value);
+            var f_x1 = parseFloat(document.getElementById('f_x1').value);
+            var f_x2 = parseFloat(document.getElementById('f_x2').value);
+            var a = parseFloat(document.getElementById('a').value);
+            var b = parseFloat(document.getElementById('b').value);
+
+            var resultado = ((x - x1) * (x - x2) / ((x0 - x1) * (x0 - x2))) * f_x0 +
+                            ((x - x0) * (x - x2) / ((x1 - x0) * (x1 - x2))) * f_x1 +
+                            ((x - x0) * (x - x1) / ((x2 - x0) * (x2 - x1))) * f_x2;
+
+            var integral = (b - a) * (f_x0 + f_x1 + f_x2) / 3;
+
+            document.getElementById('resultado').innerHTML = "f(" + x + ") ≈ " + resultado.toFixed(2) + ", Integral ≈ " + integral.toFixed(2);
+        }
+    </script>
+</body>
+</html>

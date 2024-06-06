@@ -23,5 +23,9 @@ app.use(cookieParser())
 app.get("/",authorization.soloPublico, (req,res)=> res.sendFile(__dirname + "/pages/login.html"));
 app.get("/register",authorization.soloPublico,(req,res)=> res.sendFile(__dirname + "/pages/register.html"));
 app.get("/admin",authorization.soloAdmin,(req,res)=> res.sendFile(__dirname + "/pages/admin/admin.html"));
+app.get("/matrices", authorization.soloAdmin, (req, res) => res.sendFile(__dirname + "/pages/admin/matrices.html"));
+app.get("/lineal", authorization.soloAdmin, (req, res) => res.sendFile(__dirname + "/pages/admin/lineal.html"));
+app.get("/lagrange", authorization.soloAdmin, (req, res) => res.sendFile(__dirname + "/pages/admin/lagrange.html"));
+app.get("/lista", authorization.soloAdmin, (req, res) => res.sendFile(__dirname + "/pages/admin/lista.html"));
 app.post("/api/login",authentication.login);
 app.post("/api/register",authentication.register);

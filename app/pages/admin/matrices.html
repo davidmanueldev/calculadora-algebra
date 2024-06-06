@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método de Sarrus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Reddit+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+            border: 3px solid #9b59b6;
+            box-shadow: 0 0 15px #9b59b6;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #9b59b6;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        form input[type="number"] {
+            width: 60px;
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            text-align: center;
+            font-family: 'Reddit Mono', monospace;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            color: #fff;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Método de Sarrus</h1>
+        <form id="matrixForm">
+            <h2>Ingrese los elementos de la matriz 3x3:</h2>
+            <table>
+                <tr>
+                    <td><label for="a11">A11:</label></td>
+                    <td><input type="number" id="a11" name="a11" required></td>
+                    <td><label for="a12">A12:</label></td>
+                    <td><input type="number" id="a12" name="a12" required></td>
+                    <td><label for="a13">A13:</label></td>
+                    <td><input type="number" id="a13" name="a13" required></td>
+                </tr>
+                <tr>
+                    <td><label for="a21">A21:</label></td>
+                    <td><input type="number" id="a21" name="a21" required></td>
+                    <td><label for="a22">A22:</label></td>
+                    <td><input type="number" id="a22" name="a22" required></td>
+                    <td><label for="a23">A23:</label></td>
+                    <td><input type="number" id="a23" name="a23" required></td>
+                </tr>
+                <tr>
+                    <td><label for="a31">A31:</label></td>
+                    <td><input type="number" id="a31" name="a31" required></td>
+                    <td><label for="a32">A32:</label></td>
+                    <td><input type="number" id="a32" name="a32" required></td>
+                    <td><label for="a33">A33:</label></td>
+                    <td><input type="number" id="a33" name="a33" required></td>
+                </tr>
+            </table>
+            <button type="button" onclick="calculate()">Calcular</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Obtener los valores ingresados por el usuario
+            var a11 = parseInt(document.getElementById('a11').value);
+            var a12 = parseInt(document.getElementById('a12').value);
+            var a13 = parseInt(document.getElementById('a13').value);
+            var a21 = parseInt(document.getElementById('a21').value);
+            var a22 = parseInt(document.getElementById('a22').value);
+            var a23 = parseInt(document.getElementById('a23').value);
+            var a31 = parseInt(document.getElementById('a31').value);
+            var a32 = parseInt(document.getElementById('a32').value);
+            var a33 = parseInt(document.getElementById('a33').value);
+
+            // Duplicar las dos primeras filas y sus columnas
+            var matrizNew = [
+                [a11, a12, a13],
+                [a21, a22, a23],
+                [a31, a32, a33],
+                [a11, a12, a13],
+                [a21, a22, a23]
+            ];
+
+            // Calcular las variables de la matrizNew
+            var b1 = matrizNew[0][0] * matrizNew[1][1] * matrizNew[2][2];
+            var b2 = matrizNew[1][0] * matrizNew[2][1] * matrizNew[3][2];
+            var b3 = matrizNew[2][0] * matrizNew[3][1] * matrizNew[4][2];
+            var c1 = matrizNew[0][2] * matrizNew[1][1] * matrizNew[2][0];
+            var c2 = matrizNew[1][2] * matrizNew[2][1] * matrizNew[3][0];
+            var c3 = matrizNew[2][2] * matrizNew[3][1] * matrizNew[4][0];
+
+            // Calcular la determinante
+            var determinante = (b1 + b2 + b3) - (c1 + c2 + c3);
+
+            // Mostrar los resultados
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = "<h2>Matriz A:</h2>";
+            resultDiv.innerHTML += "<table>";
+            resultDiv.innerHTML += "<tr><td>A11(" + a11 + ")</td><td>A12(" + a12 + ")</td><td>A13(" + a13 + ")</td></tr>";
+            resultDiv.innerHTML += "<tr><td>A21(" + a21 + ")</td><td>A22(" + a22 + ")</td><td>A23(" + a23 + ")</td></tr>";
+            resultDiv.innerHTML += "<tr><td>A31(" + a31 + ")</td><td>A32(" + a32 + ")</td><td>A33(" + a33 + ")</td></tr>";
+            resultDiv.innerHTML += "</table>";
+
+            resultDiv.innerHTML += "<h2>Procedimiento de Cálculo del Determinante:</h2>";
+            resultDiv.innerHTML += "<p>b1 = " + matrizNew[0][0] + " * " + matrizNew[1][1] + " * " + matrizNew[2][2] + " = " + b1 + "</p>";
+            resultDiv.innerHTML += "<p>b2 = " + matrizNew[1][0] + " * " + matrizNew[2][1] + " * " + matrizNew[3][2] + " = " + b2 + "</p>";
+            resultDiv.innerHTML += "<p>b3 = " + matrizNew[2][0] + " * " + matrizNew[3][1] + " * " + matrizNew[4][2] + " = " + b3 + "</p>";
+            resultDiv.innerHTML += "<p>c1 = " + matrizNew[0][2] + " * " + matrizNew[1][1] + " * " + matrizNew[2][0] + " = " + c1 + "</p>";
+            resultDiv.innerHTML += "<p>c2 = " + matrizNew[1][2] + " * " + matrizNew[2][1] + " * " + matrizNew[3][0] + " = " + c2 + "</p>";
+            resultDiv.innerHTML += "<p>c3 = " + matrizNew[2][2] + " * " + matrizNew[3][1] + " * " + matrizNew[4][0] + " = " + c3 + "</p>";
+            resultDiv.innerHTML += "<p>Determinante = (b1 + b2 + b3) - (c1 + c2 + c3) = (" + b1 + " + " + b2 + " + " + b3 + ") - (" + c1 + " + " + c2 + " + " + c3 + ") = " + determinante + "</p>";
+        }
+    </script>
+</body>
+</html>

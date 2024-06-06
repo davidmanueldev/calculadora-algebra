@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,5 +14,132 @@
       <button>Cerrar sesión</button>
     </div>
   </main>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Botones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #b213c7; /* Fondo gris oscuro */
+            color: white; /* Texto blanco */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center; /* Alinear contenido verticalmente */
+            justify-content: center; /* Alinear contenido horizontalmente */
+            height: 100vh;
+            position: relative; /* Posición relativa para el body */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Alinear contenido al centro */
+            padding: 20px;
+            border-radius: 10px; /* Borde redondeado */
+            box-shadow: 0 0 10px rgba(244, 244, 244, 0.911); /* Sombra */
+        }
+        h1 {
+            margin-top: 0;
+            margin-bottom: 40px;
+            font-size: 36px; /* Tamaño de letra para el título */
+            text-align: center; /* Alinear el texto al centro */
+        }
+        .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: row; /* Cambio a dirección de fila */
+            flex-wrap: wrap; /* Envolver elementos si no caben en una línea */
+            justify-content: center; /* Alinear contenido horizontalmente */
+            width: 100%; /* Ocupar todo el ancho disponible */
+        }
+        .list__item {
+            margin: 10px; /* Espacio entre los botones */
+        }
+        .list__button {
+            background-color: #007bff; /* Azul */
+            color: white; /* Texto blanco */
+            padding: 15px 20px;
+            border: none;
+            border-radius: 25px; /* Borde redondeado */
+            font-size: 20px; /* Tamaño de letra para los botones */
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+            display: flex; /* Alinear contenido en columna */
+            align-items: center; /* Alinear contenido al centro */
+            justify-content: center; /* Alinear contenido horizontalmente */
+            text-transform: uppercase; /* Convertir texto a mayúsculas */
+        }
+        .list__button:hover,
+        .list__button.active {
+            background-color: #8dc63f; /* Verde lechuga */
+        }
+        .icon {
+            margin-right: 10px; /* Espacio entre el icono y el texto */
+            font-size: 60px; /* Aumentar el tamaño del icono a 3 veces */
+        }
+        /* Estilo para el logo */
+        .logo {
+            position: absolute; /* Posición absoluta */
+            top: 20px; /* Distancia desde la parte superior */
+            right: 20px; /* Distancia desde la parte derecha */
+            width: 200px; /* Aumentar el tamaño del logo */
+            height: auto; /* Altura ajustable */
+        }
+    </style>
+</head>
+<body>
+    <img src="D:\iconos\—Pngtree—beautiful blue wolf flat concept_6643136 (1).png" alt="Logo" class="logo"> <!-- Aquí agregamos el logo -->
+    <div class="container">  
+        <h1>¡ALGEBRA!</h1>
+        <nav class="nav">
+            <ul class="list">
+                <li class="list__item">
+                    <a href="/lineal" class="list__button"><i class="fas fa-book icon"></i> Interpolación Lineal</a>
+                </li>
+                <li class="list__item">
+                    <a href="/matrices" class="list__button"><i class="fas fa-book icon"></i>Determinate por Sarrus</a>
+                </li>
+                <li class="list__item">
+                    <a href="/lagrange" class="list__button"><i class="fas fa-book icon"></i>Lagrange con Integral</a>
+                </li>
+                <li class="list__item">
+                    <a href="#" class="list__button"><i class="fas fa-book icon"></i> Botón 4</a>
+                </li>
+                <li class="list__item">
+                    <a href="#" class="list__button"><i class="fas fa-book icon"></i> Botón 5</a>
+                </li>
+                <li class="list__item">
+                    <a href="/lista" class="list__button"><i class="fas fa-book icon"></i> Informacion</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // Obtener todos los botones
+        const buttons = document.querySelectorAll('.list__button');
+
+        // Iterar sobre cada botón y agregar un evento de clic
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remover la clase 'active' de todos los botones
+                buttons.forEach(btn => btn.classList.remove('active'));
+                // Agregar la clase 'active' al botón clickeado
+                button.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
